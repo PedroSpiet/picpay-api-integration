@@ -14,17 +14,17 @@ export default class Api {
     this.sellerToken = sellerToken;
 
     this.baseUrl = 'https://appws.picpay.com/ecommerce/public';
-
     this.instance = axios.create({
       baseURL: this.getBaseUrl(),
       headers: {
-        ContentType: 'application/json',
+        'accept-encoding': 'gzip,deflate',
+        'Content-type': 'application/json',
         'x-picpay-token': this.picpayToken,
       },
     });
   }
 
-  public async getBaseUrl(): string {
+  public getBaseUrl(): string {
     return this.baseUrl;
   }
 

@@ -10,7 +10,7 @@ import 'express-async-errors';
 import AppError from '../../errors/AppError';
 import Routes from './routes';
 
-const port = 3333 || process.env.port;
+const port = process.env.port || 3333 ;
 const app = express();
 
 app.use(cors());

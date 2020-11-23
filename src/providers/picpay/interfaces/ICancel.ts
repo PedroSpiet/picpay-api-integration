@@ -1,4 +1,4 @@
-export interface ICancel {
+export  default interface ICancel {
   referenceId: string;
-  authorizationId: string;
+  authorizationId?: string;
 }

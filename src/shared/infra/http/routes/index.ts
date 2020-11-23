@@ -1,9 +1,13 @@
 import { Router } from 'express';
+import IntegrationController from '../../../../controller/integrationController';
 
+const integration = new IntegrationController();
 const router = Router();
 
-router.get('/', (req, res) => {
-  return res.status(200).json({ message: 'Hello World!'});
-})
+router.post('/payments', integration.payment);
+
+router.get('/show/:id', integration.show);
+
+
 
 export default router;

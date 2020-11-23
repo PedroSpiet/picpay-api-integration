@@ -1,6 +1,6 @@
 import IBuyer from './IBuyer';
 
-export interface IPayload {
+export default interface IPayload {
   referenceId: string;
   value: number;
   callbackUrl: string;

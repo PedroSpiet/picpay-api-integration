@@ -1,11 +1,10 @@
 import Api from './api';
-import { ICancel } from './interfaces/ICancel';
+import ICancel from './interfaces/ICancel';
 import ICancelResponse from './interfaces/ICancelResponse';
-import { IPayload } from './interfaces/IPayload';
+import IErrorResponse from './interfaces/IErrorResponse';
+import IPayload from './interfaces/IPayload';
 import IPaymentResponse from './interfaces/IPaymentResponse';
-import IErrorResponse from './interfaces/IStatusResponse';
 import IStatusResponse from './interfaces/IStatusResponse';
-
 export default class Payment {
   public httpClient: any;
 
@@ -25,8 +24,7 @@ export default class Payment {
    *
    * @param {IPayload} payload
    */
-
-  async send(payload: IPayload): Promise<IPaymentResponse | IErrorResponse> {
+  async send(payload: IPayload): Promise<JSON | IErrorResponse> {
     const uri = '/payments';
     const response = await this.httpClient.post(uri, payload);
 
@@ -36,12 +34,11 @@ export default class Payment {
   /**
    * cancelamento/estorno de um pedido
    */
-
   async cancel(body: ICancel): Promise<ICancelResponse | IErrorResponse> {
     const uri = `/payments/${body.referenceId}/cancellations`;
 
     const response = await this.httpClient.post(uri, body);
- 
+
     return response;
   }
 
@@ -50,7 +47,6 @@ export default class Payment {
    *
    * @param {string} referenceId Identificador da transação
    */
-
   async status(referenceId: string): Promise<IStatusResponse | IErrorResponse> {
     const uri = `/payments/${referenceId}/status`;
     const response = await this.httpClient.get(uri);
