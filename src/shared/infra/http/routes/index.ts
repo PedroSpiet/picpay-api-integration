@@ -8,6 +8,9 @@ router.post('/payments', integration.payment);
 
 router.get('/show/:id', integration.show);
 
-
+router.get(
+  '/remove/:refId',
+  integration.cancelPayment,
+);
 
 export default router;

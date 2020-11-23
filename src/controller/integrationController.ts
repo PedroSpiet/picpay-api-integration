@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import IBuyer from '../providers/picpay/interfaces/IBuyer';
 import  IPayload  from '../providers/picpay/interfaces/IPayload';
 import Payment from '../providers/picpay/payment';
+import CancelPaymentService from '../services/CancelPaymentService';
 import CreatePaymentService from '../services/CreatePaymentService';
 import ShowPaymentService from '../services/ShowPaymentService';
 
@@ -69,5 +70,18 @@ export default class IntegrationApiController {
     const resPayment = await paymentShow.execute(id);
 
     return res.status(200).json(resPayment);
+  }
+
+  public async cancelPayment(req: Request, res: Response): Promise<Response> {
+    const id = req.params.refId;
+
+    if (!id) {
+      return res.status(401).json({ error: 'payment doenst exist' });
+    }
+
+    const paymentCancel = new CancelPaymentService();
+    await paymentCancel.execute(id);
+
+    return res.json({ message: 'Cancelado com sucesso!' });
   }
 }
